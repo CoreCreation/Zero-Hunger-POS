@@ -5,9 +5,31 @@ import { IonicApp, IonicErrorHandler, IonicModule } from 'ionic-angular';
 import { MyApp } from './app.component';
 import { HomePage } from '../pages/home/home';
 import { ListPage } from '../pages/list/list';
+import { CustomerInformationPage } from '../pages/customer-information/customer-information';
+import { FinishOrderPage } from '../pages/finish-order/finish-order';
+import { AdminLoginPage } from '../pages/admin-login/admin-login';
+import { AdminHomePage } from '../pages/admin-home/admin-home';
+import {AdminCurrentOrdersPage} from '../pages/admin-current-orders/admin-current-orders';
+import { CurrentOrderPage } from '../pages/current-order/current-order';
+import { OrderFinishPage } from '../pages/order-finish/order-finish';
 
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
+import { FirebaseProvider } from '../providers/firebase/firebase';
+
+// Import the AF2 Module
+import { AngularFireModule } from 'angularfire2';
+import { AngularFireDatabaseModule } from 'angularfire2/database';
+
+// AF2 Settings
+export const firebaseConfig = {
+    apiKey: "APIKEY",
+    authDomain: "DATA",
+    databaseURL: "https://DATA",
+    projectId: "DATA",
+    storageBucket: "DATA.appspot.com",
+    messagingSenderId: "DATA"
+};
 
 @NgModule({
   declarations: [
@@ -18,17 +40,27 @@ import { SplashScreen } from '@ionic-native/splash-screen';
   imports: [
     BrowserModule,
     IonicModule.forRoot(MyApp),
+    AngularFireModule.initializeApp(firebaseConfig),
+    AngularFireDatabaseModule
   ],
   bootstrap: [IonicApp],
   entryComponents: [
     MyApp,
     HomePage,
-    ListPage
+    ListPage,
+    CustomerInformationPage,
+    FinishOrderPage,
+    AdminLoginPage,
+    AdminHomePage,
+    AdminCurrentOrdersPage,
+    CurrentOrderPage,
+    OrderFinishPage
   ],
   providers: [
     StatusBar,
     SplashScreen,
-    {provide: ErrorHandler, useClass: IonicErrorHandler}
+    {provide: ErrorHandler, useClass: IonicErrorHandler},
+    FirebaseProvider
   ]
 })
 export class AppModule {}

@@ -3,16 +3,28 @@
     <button ion-button menuToggle>
       <ion-icon name="menu"></ion-icon>
     </button>
-    <ion-title>Home</ion-title>
+    <ion-title>Zero Hunger</ion-title>
   </ion-navbar>
 </ion-header>
 
 <ion-content padding>
-  <h3>Ionic Menu Starter</h3>
-
-  <p>
-    If you get lost, the <a href="http://ionicframework.com/docs/v2">docs</a> will show you the way.
-  </p>
-
-  <button ion-button secondary menuToggle>Toggle Menu</button>
+  <ion-card *ngFor="let menuItem of menuItems | async" >
+    <ion-card-header>
+    {{ menuItem.title }}
+    </ion-card-header>
+    <ion-card-content>
+      <ion-grid>
+        <ion-row>
+      <ion-col col-4><button ion-button (click)="removeFromOrder(menuItem)">-</button>
+      </ion-col>
+      <ion-col col-4><ion-badge>{{ currentOrder.getCount(menuItem.title) }} </ion-badge>
+      </ion-col>
+      <ion-col col-4><button ion-button (click)="addToOrder(menuItem)">+</button>
+    </ion-col>
+    </ion-row>
+    </ion-grid>
+    </ion-card-content>
+    </ion-card>
+  <!-- <button ion-button secondary (click)='sendPizza()'>Add Pizza</button> -->
+  <button ion-button secondary full (click)='pushCustomerInfoPage()'>Next</button>
 </ion-content>
