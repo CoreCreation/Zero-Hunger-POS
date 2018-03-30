@@ -28,7 +28,7 @@ export class AdminLoginPage {
       email: new FormControl('', [Validators.required, Validators.email] ),
       password: new FormControl('', Validators.required)
     });  
-    if(this.afAuth.authState != null){
+    if(this.afAuth.auth.currentUser != null){
       this.navCtrl.setRoot(AdminHomePage);
     }
   }

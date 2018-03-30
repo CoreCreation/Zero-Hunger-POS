@@ -3,6 +3,7 @@ import { MenuItem } from './menuItem';
 import { forEach } from '@firebase/util/dist/esm/src/obj';
 
 export class Order{
+    key: string;
     date: string;
     customer: Customer;
     orderItems: Array<MenuItem>;

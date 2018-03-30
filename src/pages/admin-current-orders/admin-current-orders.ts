@@ -30,20 +30,17 @@ export class AdminCurrentOrdersPage {
   {
     //Set up database connection
     this.dbConnection = afDatabase;
-    //Set up and pull the menu items
-    //TODO Make Data into Objects Again
+    //This binds the keys into the order object
+    //order.key
     this.currentOrders = this.dbConnection.list<Order>('/orders').snapshotChanges().map(actions => {
       return actions.map(action => ({ key: action.key, ...action.payload.val() }));
     });
   }
 
-  gotoOrder(order: Order, key: string){
+  gotoOrder(order: Order){
     let fullOrder = new Order();
     fullOrder.construct(order.date,order.customer, order.orderItems);
-    this.navCtrl.push(CurrentOrderPage, {
-      'order':order,
-      'key':key
-    });
+    this.navCtrl.push(CurrentOrderPage, order);
   }
 
   ionViewDidLoad() {

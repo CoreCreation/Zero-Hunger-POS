@@ -24,17 +24,18 @@ export class CurrentOrderPage {
   key:string;
   constructor(public navCtrl: NavController, public navParams: NavParams, afDatabase: AngularFireDatabase, public alertCtrl: AlertController) {
     this.afDatabase = afDatabase;
-    this.order = this.navParams.get('order');
-    this.key = this.navParams.get('key');
+    this.order = this.navParams.data;
+    //this.key = this.navParams.get('key');
   }
   
-  finishOrder(orderKey: string, order: Order){
+  finishOrder(order: Order){
+    console.log(order);
     this.afDatabase.list<Order>('/completedOrders').push(new FinishedOrder(order.date, order.customer, order.orderItems));
-    this.afDatabase.list<Order>('/orders').remove(orderKey);
+    this.afDatabase.list<Order>('/orders').remove(order.key);
     this.navCtrl.popToRoot();
   }
 
-  deleteOrder(orderKey: string){
+  deleteOrder(order){
     let alert= this.alertCtrl.create({
       title: "Delete this Order?",
       buttons: [
@@ -50,7 +51,7 @@ export class CurrentOrderPage {
           handler: () =>
           {
 
-            this.afDatabase.list<Order>('/orders').remove(orderKey);
+            this.afDatabase.list<Order>('/orders').remove(order.key);
             this.navCtrl.popToRoot();
           }
         }

@@ -35,7 +35,15 @@ export const firebaseConfig = {
   declarations: [
     MyApp,
     HomePage,
-    ListPage
+    ListPage,
+    //These have to leave for the build
+    CustomerInformationPage,
+    FinishOrderPage,
+    AdminLoginPage,
+    AdminHomePage,
+    AdminCurrentOrdersPage,
+    CurrentOrderPage,
+    OrderFinishPage
   ],
   imports: [
     BrowserModule,
