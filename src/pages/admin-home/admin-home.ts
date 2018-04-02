@@ -6,6 +6,7 @@ import * as firebase from 'firebase/app';
 //Pages
 import { HomePage } from '../home/home';
 import {AdminCurrentOrdersPage} from '../admin-current-orders/admin-current-orders';
+import { AdminMenuPage } from '../admin-menu/admin-menu';
 
 /**
  * Generated class for the AdminHomePage page.
@@ -32,6 +33,11 @@ export class AdminHomePage {
   gotoCurrentOrders()
   {
     this.navCtrl.push(AdminCurrentOrdersPage)
+  }
+
+  gotoMenu()
+  {
+    this.navCtrl.push(AdminMenuPage);
   }
 
   returnHome() {

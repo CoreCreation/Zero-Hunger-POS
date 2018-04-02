@@ -20,6 +20,8 @@ import { FirebaseProvider } from '../providers/firebase/firebase';
 // Import the AF2 Module
 import { AngularFireModule } from 'angularfire2';
 import { AngularFireDatabaseModule } from 'angularfire2/database';
+import { AdminMenuPage } from '../pages/admin-menu/admin-menu';
+import { AdminMenuAddPage } from '../pages/admin-menu-add/admin-menu-add';
 
 // AF2 Settings
 export const firebaseConfig = {
@@ -43,7 +45,9 @@ export const firebaseConfig = {
     AdminHomePage,
     AdminCurrentOrdersPage,
     CurrentOrderPage,
-    OrderFinishPage
+    OrderFinishPage,
+    AdminMenuPage,
+    AdminMenuAddPage
   ],
   imports: [
     BrowserModule,
@@ -62,7 +66,9 @@ export const firebaseConfig = {
     AdminHomePage,
     AdminCurrentOrdersPage,
     CurrentOrderPage,
-    OrderFinishPage
+    OrderFinishPage,
+    AdminMenuPage,
+    AdminMenuAddPage
   ],
   providers: [
     StatusBar,

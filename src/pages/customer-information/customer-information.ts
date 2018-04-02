@@ -3,7 +3,7 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 
 import { FinishOrderPage } from '../finish-order/finish-order'
 
-import { MenuItem, foodType } from '../../classes/menuItem';
+import { MenuItem } from '../../classes/menuItem';
 import { Order } from '../../classes/order';
 import { Customer } from '../../classes/customer';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
@@ -39,7 +39,7 @@ export class CustomerInformationPage {
     if(this.validateForm(name, tele)){
       this.pushFinishOrderPage();
     }else{
-      //Alert Error
+      // TODO Alert Error
     }
   }
 

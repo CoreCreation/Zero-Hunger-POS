@@ -17,9 +17,9 @@
         <ion-row>
       <ion-col col-4><button ion-button (click)="removeFromOrder(menuItem)">-</button>
       </ion-col>
-      <ion-col col-4><ion-badge>{{ currentOrder.getCount(menuItem.title) }} </ion-badge>
+      <ion-col col-4 text-center><div padding-vertical><h1>{{ currentOrder.getCount(menuItem.title) }} </h1></div>
       </ion-col>
-      <ion-col col-4><button ion-button (click)="addToOrder(menuItem)">+</button>
+      <ion-col col-4 text-right><button ion-button (click)="addToOrder(menuItem)">+</button>
     </ion-col>
     </ion-row>
     </ion-grid>
