@@ -7,7 +7,13 @@
 <ion-header>
 
   <ion-navbar>
-    <ion-title>admin-menu</ion-title>
+    <ion-title>Menu Control</ion-title>
+    <ion-buttons end>
+        <button ion-button icon-only
+        (click)="addMenuItem()">
+        <ion-icon name="add"></ion-icon>
+      </button>
+      </ion-buttons>
   </ion-navbar>
 
 </ion-header>
@@ -19,10 +25,6 @@
     <button ion-item *ngFor="let menuItem of menuItems | async"
       (click)="editMenuItem(menuItem)">
       {{ menuItem.title }}
-    </button>
-    <button ion-item
-      (click)="addMenuItem()">
-      Add New Item
     </button>
   </ion-list>
 

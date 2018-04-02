@@ -24,7 +24,14 @@
 
       <ion-input type="tel" formControlName='tele' required></ion-input>
     </ion-item>
-  <button ion-button secondary full type="submit">Next</button>
+    <ion-footer [hidden]="this.formGroup.status != 'VALID'"> 
+        <ion-toolbar>
+          <ion-buttons end>
+          <button ion-button type="submit">Next</button>
+          </ion-buttons>
+        </ion-toolbar>
+      </ion-footer>
   </form> 
 </ion-list>
+
 </ion-content>

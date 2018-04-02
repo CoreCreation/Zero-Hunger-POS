@@ -37,9 +37,9 @@ export class AdminMenuAddPage {
       this.itemCookTime = menuItem.cooktime;
       this.itemType = menuItem.type;
     }else{
-      this.itemTitle = ""
-      this.itemDesc = ""
-      this.itemCost = 0
+      this.itemTitle = "";
+      this.itemDesc = "";
+      this.itemCost = 0;
       this.itemCookTime = 0;
       this.itemType = "";
     }
@@ -54,20 +54,22 @@ export class AdminMenuAddPage {
       type: new FormControl(this.itemType, Validators.required)
       
     });
-
     }
 
     save(title: string, desc: string, cost: number, cookTime: number, type: string){
       if(this.menuAdd.status != "VALID"){
         return false;
       }
+
+      cost = Number.parseInt(cost.toString());
+      cookTime = Number.parseInt(cookTime.toString());
+
       let item = new MenuItem(title, desc, cost, cookTime, type);
       if(this.key != null){
         this.dbConnection.list('/menuItems').update(this.key, item)
       } else {
         this.dbConnection.list("/menuItems").push(item);
       }
-      
       let alert = this.alertCtrl.create({
         title: "Item Saved",
         buttons: [{

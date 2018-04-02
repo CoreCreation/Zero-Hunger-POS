@@ -13,6 +13,7 @@
     {{ menuItem.title }}
     </ion-card-header>
     <ion-card-content>
+      <!-- {{ menutItem.description }} -->
       <ion-grid>
         <ion-row>
       <ion-col col-4><button ion-button (click)="removeFromOrder(menuItem)">-</button>
@@ -23,8 +24,15 @@
     </ion-col>
     </ion-row>
     </ion-grid>
+    <div text-right>${{ menuItem.cost }}</div>
     </ion-card-content>
     </ion-card>
-  <!-- <button ion-button secondary (click)='sendPizza()'>Add Pizza</button> -->
-  <button [hidden]="currentOrder.empty()" ion-button secondary full (click)='pushCustomerInfoPage()'>Next</button>
+  <ion-footer [hidden]="currentOrder.empty()"> 
+    <ion-toolbar>
+      <ion-title>Total: ${{currentOrder.getTotal()}}</ion-title> 
+      <ion-buttons end>
+      <button ion-button [hidden]="currentOrder.empty()" (click)='pushCustomerInfoPage()'>Next</button>
+      </ion-buttons>
+    </ion-toolbar>
+  </ion-footer>
 </ion-content>
