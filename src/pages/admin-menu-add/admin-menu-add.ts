@@ -18,6 +18,7 @@ import { FormGroup, FormControl, Validators } from '@angular/forms';
   templateUrl: 'admin-menu-add.html',
 })
 export class AdminMenuAddPage {
+  key: string;
   dbConnection: AngularFireDatabase;
   menuAdd: FormGroup;
   itemTitle:string;
@@ -27,32 +28,45 @@ export class AdminMenuAddPage {
   itemType: string;
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public afDatabase: AngularFireDatabase, public alertCtrl: AlertController) {
-    this.dbConnection = afDatabase;
-
-    this.menuAdd = new FormGroup({
-      title: new FormControl('', Validators.required),
-      description: new FormControl('', Validators.required),
-      cost: new FormControl('', Validators.required),
-      cookTime: new FormControl('', Validators.required),
-      type: new FormControl('', Validators.required)
-      
-    });
-
     if(this.navParams.data != null){
       let menuItem:MenuItem = this.navParams.data;
+      this.key = menuItem.key;
       this.itemTitle = menuItem.title;
       this.itemDesc = menuItem.description;
       this.itemCost = menuItem.cost;
       this.itemCookTime = menuItem.cooktime;
       this.itemType = menuItem.type;
+    }else{
+      this.itemTitle = ""
+      this.itemDesc = ""
+      this.itemCost = 0
+      this.itemCookTime = 0;
+      this.itemType = "";
     }
+
+    this.dbConnection = afDatabase;
+
+    this.menuAdd = new FormGroup({
+      title: new FormControl(this.itemTitle, Validators.required),
+      description: new FormControl(this.itemDesc, Validators.required),
+      cost: new FormControl(this.itemCost, Validators.required),
+      cookTime: new FormControl(this.itemCookTime, Validators.required),
+      type: new FormControl(this.itemType, Validators.required)
+      
+    });
+
     }
 
     save(title: string, desc: string, cost: number, cookTime: number, type: string){
       if(this.menuAdd.status != "VALID"){
         return false;
       }
-      this.dbConnection.list("/menuItems").push(new MenuItem(title, desc, cost, cookTime, type));
+      let item = new MenuItem(title, desc, cost, cookTime, type);
+      if(this.key != null){
+        this.dbConnection.list('/menuItems').update(this.key, item)
+      } else {
+        this.dbConnection.list("/menuItems").push(item);
+      }
       
       let alert = this.alertCtrl.create({
         title: "Item Saved",
@@ -70,5 +84,11 @@ export class AdminMenuAddPage {
   ionViewDidLoad() {
     console.log('ionViewDidLoad AdminMenuAddPage');
   }
-
+  
+  delete(){
+    if(this.key != null || this.key != ""){
+    this.dbConnection.list('/menuItems').remove(this.key);
+    this.navCtrl.popToRoot();
+    }
+  }
 }

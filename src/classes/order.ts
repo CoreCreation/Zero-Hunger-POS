@@ -44,6 +44,13 @@ export class Order{
         this.orderItems.splice(index,1);
     }
 
+    empty():boolean{
+        if(this.orderItems.length == 0){
+            return true;
+        }
+        return false;
+    }
+
     getCount(itemTitle:string){
         //This provides a quick way to get the total of items on small orders
         //In a larger system the data needs to be flattened and tracked in a cleaner fashion

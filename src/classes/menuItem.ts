@@ -1,4 +1,5 @@
 export class MenuItem {
+    key: string;
     readonly  title: string;
     readonly  description: string;
     //Cost will never be calculated client side

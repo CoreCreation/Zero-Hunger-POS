@@ -29,7 +29,9 @@ export class AdminMenuPage {
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public afDatabase: AngularFireDatabase) {
     this.dbConnection = afDatabase;
-    this.menuItems = this.dbConnection.list<MenuItem>('/menuItems').valueChanges();
+    this.menuItems = this.dbConnection.list<MenuItem>('/menuItems').snapshotChanges().map(actions => {
+      return actions.map(action => ({ key: action.key, ...action.payload.val() }));
+    });
   }
 
   editMenuItem(menuItem: MenuItem){

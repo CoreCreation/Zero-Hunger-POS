@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { NavController } from 'ionic-angular';
 import { CustomerInformationPage } from '../customer-information/customer-information';
-import { MenuItem, foodType } from '../../classes/menuItem';
+import { MenuItem } from '../../classes/menuItem';
 import { Order } from '../../classes/order';
 import { AngularFireDatabase, AngularFireList } from 'angularfire2/database';
 import { Observable } from 'rxjs/Observable';
@@ -33,13 +33,6 @@ export class HomePage {
   removeFromOrder(menuItem: MenuItem)
   {
     this.currentOrder.removeItem(menuItem);
-  }
-
-  sendPizza() {
-    this.dbConnection.list<MenuItem>('menuItems').push(new MenuItem('Chicken Pizza', 'Chicken Pizza', 140, 10, 0));
-    this.dbConnection.list<MenuItem>('menuItems').push(new MenuItem('Hawaiian Pizza', 'Pineapple', 130, 10, 0));
-    this.dbConnection.list<MenuItem>('menuItems').push(new MenuItem('COuntry Mushroom', 'Shrooms', 140, 10, 0));
-    this.dbConnection.list<MenuItem>('menuItems').push(new MenuItem('Spicy BBQ Chicken', 'Its Got Kick', 150, 10, 0));
   }
 
   pushCustomerInfoPage()

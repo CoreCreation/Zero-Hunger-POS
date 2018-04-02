@@ -26,5 +26,5 @@
     </ion-card-content>
     </ion-card>
   <!-- <button ion-button secondary (click)='sendPizza()'>Add Pizza</button> -->
-  <button ion-button secondary full (click)='pushCustomerInfoPage()'>Next</button>
+  <button [hidden]="currentOrder.empty()" ion-button secondary full (click)='pushCustomerInfoPage()'>Next</button>
 </ion-content>
