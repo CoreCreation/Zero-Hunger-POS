@@ -20,6 +20,7 @@ import { FirebaseProvider } from '../providers/firebase/firebase';
 // Import the AF2 Module
 import { AngularFireModule } from 'angularfire2';
 import { AngularFireDatabaseModule } from 'angularfire2/database';
+import { AngularFireStorageModule } from 'angularfire2/storage';
 import { AdminMenuPage } from '../pages/admin-menu/admin-menu';
 import { AdminMenuAddPage } from '../pages/admin-menu-add/admin-menu-add';
 
@@ -53,7 +54,8 @@ export const firebaseConfig = {
     BrowserModule,
     IonicModule.forRoot(MyApp),
     AngularFireModule.initializeApp(firebaseConfig),
-    AngularFireDatabaseModule
+    AngularFireDatabaseModule,
+    AngularFireStorageModule
   ],
   bootstrap: [IonicApp],
   entryComponents: [

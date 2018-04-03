@@ -25,6 +25,8 @@ export class CustomerInformationPage {
   currentOrder: Order;
   formGroup: FormGroup;
 
+  //TODO ADD ADDRESS AND pick up or Delivery or eat in
+
   constructor(public navCtrl: NavController, public navParams: NavParams) {
     this.formGroup = new FormGroup({
       name: new FormControl('', Validators.required),
@@ -39,7 +41,7 @@ export class CustomerInformationPage {
     if(this.validateForm(name, tele)){
       this.pushFinishOrderPage();
     }else{
-      // TODO Alert Error
+      // TODO ALERT ERROR
     }
   }
 

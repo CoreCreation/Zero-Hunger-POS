@@ -45,6 +45,10 @@
           <ion-label stacked>Food Type</ion-label>
           <ion-input type="text" formControlName="type" required></ion-input>
         </ion-item>
+        <ion-item>
+            <ion-label stacked>Image</ion-label>
+            <ion-input type="file" formControlName="image" (change)="upload($event)"></ion-input>
+          </ion-item>
       <button ion-button secondary full type="submit">Save</button>
       <!--TODO IF this is a new item then cancel -->
       <!-- TODO IF this is not new then delete the item -->

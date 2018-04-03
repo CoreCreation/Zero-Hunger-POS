@@ -1,10 +1,11 @@
 import { Component } from '@angular/core';
-import { NavController } from 'ionic-angular';
+import { NavController, Menu } from 'ionic-angular';
 import { CustomerInformationPage } from '../customer-information/customer-information';
 import { MenuItem } from '../../classes/menuItem';
 import { Order } from '../../classes/order';
 import { AngularFireDatabase, AngularFireList } from 'angularfire2/database';
 import { Observable } from 'rxjs/Observable';
+import { AngularFireStorage } from 'angularfire2/storage';
 
 @Component({
   selector: 'page-home',
@@ -12,22 +13,33 @@ import { Observable } from 'rxjs/Observable';
 })
 export class HomePage {
   dbConnection: AngularFireDatabase;
-  menuItems: Observable<MenuItem[]>;
+  menuItems: Observable<any[]>
   currentOrder: Order;
-  constructor(public navCtrl: NavController, afDatabase: AngularFireDatabase) 
+  constructor(public navCtrl: NavController, afDatabase: AngularFireDatabase, public afStorage: AngularFireStorage) 
   {
     //Set up database connection
     this.dbConnection = afDatabase;
     //Set up and pull the menu items
-    this.menuItems = this.dbConnection.list<MenuItem>('/menuItems').valueChanges();
+    this.menuItems = this.dbConnection.list<MenuItem>('/menuItems').snapshotChanges().map(items =>{ 
+      return items.map(item => {
+        if(item.payload.val().imageURI != null){
+          console.log("Getting URL)")
+          return new MenuItem(item.payload.val().title, item.payload.val().description, item.payload.val().cost, item.payload.val().cooktime, item.payload.val().type, item.payload.val().imageURI, afStorage);
+        }else{
+          return new MenuItem(item.payload.val().title, item.payload.val().description, item.payload.val().cost, item.payload.val().cooktime, item.payload.val().type);
+        }
+      })
+    });
     //Set up the blank order
     this.currentOrder = new Order();
   }
   //TODO Divide the Menu with a segment
   //TODO make Menu Items have a Modal pop up of description
+
   addToOrder(menuItem: MenuItem)
   {
     this.currentOrder.addItem(menuItem);
+    console.log(menuItem);
   }
 
   removeFromOrder(menuItem: MenuItem)
@@ -43,5 +55,4 @@ export class HomePage {
   printCurrentOrder(){
     this.currentOrder.logItems();
   }
-
 }
