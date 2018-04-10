@@ -23,6 +23,8 @@ export class MenuItem {
         this.type = type;
         if(imageURI != null){
             this.imageURI = imageURI;
+        }
+        if(afStorage != null){
             let ref = afStorage.ref(this.imageURI);
             this.image = ref.getDownloadURL();
         }

@@ -14,14 +14,13 @@
     </ion-card-header>
     <img *ngIf="menuItem.imageURI != null" [src]="menuItem.image | async" />
     <ion-card-content>
-      The image URL is: {{ menuItem.image }}
       {{ menuItem.description }}
       <ion-grid>
         <ion-row>
       <ion-col col-4><button ion-button (click)="removeFromOrder(menuItem)">-</button>
       </ion-col>
       <ion-col col-4 text-center><div padding-vertical><h1>{{ currentOrder.getCount(menuItem.title) }} </h1></div>
-      </ion-col>1
+      </ion-col>
       <ion-col col-4 text-right><button ion-button (click)="addToOrder(menuItem)">+</button>
     </ion-col>
     </ion-row>

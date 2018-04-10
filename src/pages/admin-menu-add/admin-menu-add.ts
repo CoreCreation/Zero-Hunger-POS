@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, Alert, AlertController } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, Alert, AlertController, DateTime } from 'ionic-angular';
 import { AngularFireDatabase } from 'angularfire2/database';
 import { MenuItem } from '../../classes/menuItem';
 import { Observable } from '@firebase/util';
@@ -57,8 +57,7 @@ export class AdminMenuAddPage {
       description: new FormControl(this.itemDesc, Validators.required),
       cost: new FormControl(this.itemCost, Validators.required),
       cookTime: new FormControl(this.itemCookTime, Validators.required),
-      type: new FormControl(this.itemType, Validators.required),
-      image: new FormControl(this.itemURI)
+      type: new FormControl(this.itemType, Validators.required)
     });
     }
 
@@ -73,11 +72,9 @@ export class AdminMenuAddPage {
       let item;
       if(this.itemURI != null || this.itemURI != ""){
         item = new MenuItem(title, desc, cost, cookTime, type, this.itemURI);
-        console.log("saving with a URI" + this.itemURI);
       }
       else{
         item = new MenuItem(title, desc, cost, cookTime, type);
-        console.log("saving without a URI");
       }
       if(this.key != null){
         this.dbConnection.list('/menuItems').update(this.key, item)
@@ -98,9 +95,10 @@ export class AdminMenuAddPage {
     }
 
   upload(event){
-    console.log("file selected)");
+    let date = new Date();
     this.file = event.target.files[0];
-    this.itemURI = this.itemTitle.toLowerCase().replace(/\s+/g, '');
+    this.itemURI = event.target.files[0].name.replace('.jpg','').toLowerCase().replace(/\s+/g, '')+date.getTime();
+    alert(this.itemURI);
     this.uploadTask = this.afStor.upload(this.itemURI,this.file);
   }
 
