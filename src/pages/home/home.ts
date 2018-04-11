@@ -22,8 +22,7 @@ export class HomePage {
     //Set up and pull the menu items
     this.menuItems = this.dbConnection.list<MenuItem>('/menuItems').snapshotChanges().map(items =>{ 
       return items.map(item => {
-        if(item.payload.val().imageURI != null){
-          console.log("Getting URL)")
+        if(item.payload.val().imageURI != (null || "")){
           return new MenuItem(item.payload.val().title, item.payload.val().description, item.payload.val().cost, item.payload.val().cooktime, item.payload.val().type, item.payload.val().imageURI, afStorage);
         }else{
           return new MenuItem(item.payload.val().title, item.payload.val().description, item.payload.val().cost, item.payload.val().cooktime, item.payload.val().type);

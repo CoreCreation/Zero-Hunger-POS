@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, Alert, AlertController, DateTime } from 'ionic-angular';
 import { AngularFireDatabase } from 'angularfire2/database';
 import { MenuItem } from '../../classes/menuItem';
-import { Observable } from '@firebase/util';
+import { Observable } from 'rxjs/Observable';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { AngularFireStorage, AngularFireUploadTask } from 'angularfire2/storage';
 
@@ -29,10 +29,11 @@ export class AdminMenuAddPage {
   itemType: string;
   itemURI: string;
   file: any;
+  picture: Observable<string>;
   uploadTask: AngularFireUploadTask;
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public afDatabase: AngularFireDatabase, public alertCtrl: AlertController, public afStor: AngularFireStorage) {
-    if(this.navParams.data != null){
+    if(this.navParams.get('item') != false){
       let menuItem:MenuItem = this.navParams.data;
       this.key = menuItem.key;
       this.itemTitle = menuItem.title;
@@ -41,6 +42,9 @@ export class AdminMenuAddPage {
       this.itemCookTime = menuItem.cooktime;
       this.itemType = menuItem.type;
       this.itemURI = menuItem.imageURI;
+      if(this.itemURI != (null || "")){
+        this.picture = this.getPicURL(this.itemURI);
+      }
     }else{
       this.itemTitle = "";
       this.itemDesc = "";
@@ -61,7 +65,7 @@ export class AdminMenuAddPage {
     });
     }
 
-    save(title: string, desc: string, cost: number, cookTime: number, type: string){
+    saveItemEndPage(title: string, desc: string, cost: number, cookTime: number, type: string){
       if(this.menuAdd.status != "VALID"){
         return false;
       }
@@ -69,7 +73,23 @@ export class AdminMenuAddPage {
       cost = Number.parseInt(cost.toString());
       cookTime = Number.parseInt(cookTime.toString());
 
-      let item;
+      this.saveItem(title, desc, cost, cookTime, type);
+      
+      let alert = this.alertCtrl.create({
+        title: "Item Saved",
+        buttons: [{
+          text:'ok',
+         handler:()=>
+        {
+          this.navCtrl.pop();
+        }}]
+      });
+
+      alert.present();
+    }
+
+  saveItem(title: string, desc: string, cost: number, cookTime: number, type: string){
+    let item;
       if(this.itemURI != null || this.itemURI != ""){
         item = new MenuItem(title, desc, cost, cookTime, type, this.itemURI);
       }
@@ -81,25 +101,31 @@ export class AdminMenuAddPage {
       } else {
         this.dbConnection.list("/menuItems").push(item);
       }
-      let alert = this.alertCtrl.create({
-        title: "Item Saved",
-        buttons: [{
-          text:'ok',
-         handler:()=>
-        {
-          this.navCtrl.popToRoot();
-        }}]
-      });
-
-      alert.present();
-    }
-
+  } 
+    
   upload(event){
     let date = new Date();
     this.file = event.target.files[0];
     this.itemURI = event.target.files[0].name.replace('.jpg','').toLowerCase().replace(/\s+/g, '')+date.getTime();
-    alert(this.itemURI);
-    this.uploadTask = this.afStor.upload(this.itemURI,this.file);
+    this.afStor.upload(this.itemURI,this.file).then(data => {
+     this.picture = this.getPicURL(this.itemURI);  
+    });
+  }
+
+
+  getPicURL(URI: string){
+    let ref = this.afStor.ref(URI);
+    return ref.getDownloadURL();
+  }
+
+  deletePic(){
+    //If this item exists on the server then the picture URI needs to be erased from there too
+    this.afStor.ref(this.itemURI).delete();
+    this.itemURI = "";
+    this.picture = null;
+    if(this.key != null){
+      this.saveItem(this.itemTitle, this.itemDesc, this.itemCost, this.itemCookTime, this.itemType);
+    }
   }
 
   ionViewDidLoad() {
@@ -109,6 +135,7 @@ export class AdminMenuAddPage {
   delete(){
     if(this.key != null || this.key != ""){
     this.dbConnection.list('/menuItems').remove(this.key);
+    this.deletePic();
     this.navCtrl.popToRoot();
     }
   }

@@ -16,7 +16,7 @@
 <ion-content padding>
 
     <form [formGroup]="menuAdd"  
-    (ngSubmit)="save(
+    (ngSubmit)="saveItemEndPage(
       menuAdd.get('title').value, 
       menuAdd.get('description').value,
       menuAdd.get('cost').value,
@@ -48,14 +48,19 @@
         <ion-item [hidden]="itemURI">
           <button ion-button full type="button" (click)="file.click()">Select File</button>
         </ion-item>
-        <ion-item [hidden]="!itemURI">
-            <ion-label>{{itemURI}}</ion-label>
-            <!-- TODO Let people delete the file and upload a new one -->
-            <!-- make it delete the file off of the server too -->
-        </ion-item>
+        <ion-card [hidden]="!itemURI">
+          <ion-item>
+              <button ion-button type="button" 
+              (click)="deletePic()"
+              large icon-only clear item-end>
+                <ion-icon name="close-circle"></ion-icon>
+              </button>
+            </ion-item>
+            <ion-item>
+              <img [src]="picture | async" />
+            </ion-item> 
+        </ion-card>
           <button ion-button secondary full type="submit">Save</button>
-      <!--TODO IF this is a new item then cancel -->
-      <!-- TODO IF this is not new then delete the item -->
       </form>
       
       <button [hidden]="key == null || key == ''" ion-button secondary full (click)="delete()">Delete</button>

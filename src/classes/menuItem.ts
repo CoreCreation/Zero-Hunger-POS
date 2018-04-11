@@ -13,7 +13,7 @@ export class MenuItem {
     readonly type: string;
     readonly imageURI: string;
 
-    image : Observable<string>
+    image : Observable<string>;
 
     constructor(title: string, description: string, cost: number, _cooktime: number, type: string, imageURI?: string, afStorage?: AngularFireStorage){
         this.title = title;

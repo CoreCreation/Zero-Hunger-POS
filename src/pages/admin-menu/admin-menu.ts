@@ -39,7 +39,7 @@ export class AdminMenuPage {
   }
 
   addMenuItem(){
-    this.navCtrl.push(AdminMenuAddPage);
+    this.navCtrl.push(AdminMenuAddPage, {item:false});
   }
 
   ionViewDidLoad() {
