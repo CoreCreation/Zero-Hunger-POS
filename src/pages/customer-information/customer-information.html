@@ -11,8 +11,30 @@
 
 <ion-content padding>
     <ion-list>
-  <form [formGroup]="formGroup"  (ngSubmit)="nextPageClick(formGroup.get('name').value, formGroup.get('tele').value)">
-    <!-- // TODO Figure out the best way to handle forms -->
+  <form [formGroup]="formGroup"  (ngSubmit)="nextPageClick(
+    formGroup.get('method').value,
+    formGroup.get('name').value, 
+    formGroup.get('tele').value,
+    formGroup.get('city').value,
+    formGroup.get('district').value,
+    formGroup.get('street').value,
+    formGroup.get('number').value
+    )">
+
+
+    <ion-list radio-group formControlName='method'>
+
+      <ion-item>
+        <ion-label>Pick-Up</ion-label>
+        <ion-radio value="pickUp" checked></ion-radio>
+      </ion-item>
+      <ion-item>
+          <ion-label>Delivery</ion-label>
+          <ion-radio value="delivery"></ion-radio>
+      </ion-item>
+    </ion-list>
+
+
     <ion-item>
       <ion-label stacked>Name</ion-label>
 
@@ -24,6 +46,31 @@
 
       <ion-input type="tel" formControlName='tele' required></ion-input>
     </ion-item>
+
+    <ion-item>
+        <ion-label stacked>City</ion-label>
+  
+        <ion-input formControlName='city' required></ion-input>
+    </ion-item>
+    
+    <ion-item>
+        <ion-label stacked>District</ion-label>
+  
+        <ion-input formControlName='district' required></ion-input>
+    </ion-item>
+
+    <ion-item>
+        <ion-label stacked>Street</ion-label>
+  
+        <ion-input formControlName='street' required></ion-input>
+    </ion-item>
+
+    <ion-item>
+        <ion-label stacked>Number</ion-label>
+  
+        <ion-input formControlName='number' required></ion-input>
+    </ion-item>
+
     <ion-footer [hidden]="this.formGroup.status != 'VALID'"> 
         <ion-toolbar>
           <ion-buttons end>

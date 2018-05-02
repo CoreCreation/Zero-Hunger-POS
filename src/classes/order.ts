@@ -6,7 +6,11 @@ export class Order{
     key: string;
     date: string;
     customer: Customer;
+    method: string;
     orderItems: Array<MenuItem>;
+    //TODO Make these areas load on the status page, but do not save them during the order finish section
+    status: string;
+    message: string;
     constructor(){
         this.orderItems = new Array<MenuItem>();
         this.customer = new Customer(null, null);
@@ -14,12 +18,17 @@ export class Order{
         //It should be overwritten everytime after by the construct function
         let date = new Date();
         this.date = date.toISOString();
+
     }
     construct(date:string, customer: Customer, orderItems:Array<MenuItem>)
     {
         this.date = date;
         this.customer = customer;
         this.orderItems = orderItems;
+    }
+    setMethod(method: string)
+    {
+        this.method = method;
     }
     setCustomer(customer: Customer){
         this.customer = customer;

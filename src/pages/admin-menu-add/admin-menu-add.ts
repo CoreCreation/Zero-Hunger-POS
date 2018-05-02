@@ -31,7 +31,7 @@ export class AdminMenuAddPage {
   file: any;
   picture: Observable<string>;
   uploadTask: AngularFireUploadTask;
-
+  //TODO When the image is deleted then readded it does not add an image
   constructor(public navCtrl: NavController, public navParams: NavParams, public afDatabase: AngularFireDatabase, public alertCtrl: AlertController, public afStor: AngularFireStorage) {
     if(this.navParams.get('item') != false){
       let menuItem:MenuItem = this.navParams.data;

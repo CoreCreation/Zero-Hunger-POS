@@ -34,6 +34,7 @@ export class HomePage {
   }
   //TODO Divide the Menu with a segment
   //TODO make Menu Items have a Modal pop up of description
+  //TODO Fix the issue with the floating next button
 
   addToOrder(menuItem: MenuItem)
   {

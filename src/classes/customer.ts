@@ -1,16 +1,21 @@
 export class Customer {
     name: string;
     telephone: string;
+    city : string; 
+    district : string;
+    street : string;
+    number : string;
     constructor(name: string, telephone: string)
     {
         this.name = name;
         this.telephone = telephone;
     }
-    setName(name:string){
+    construct(name:string, tele: string, city: string, district: string, street: string, number: string){
         this.name = name;
-    }
-
-    setTelephone(telephone:string){
-        this.telephone = telephone;
+        this.telephone = tele;
+        this.city = city;
+        this.district = district;
+        this.street = street;
+        this.number = number;
     }
 }

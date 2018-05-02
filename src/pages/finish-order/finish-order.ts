@@ -32,9 +32,9 @@ export class FinishOrderPage {
   }
 
   saveOrder(){
-    this.dbConnection.list('orders').push(this.currentOrder);
+    let key = this.dbConnection.list('orders').push(this.currentOrder).key;
     //TODO Make this go to a success page
-    this.navCtrl.push(OrderFinishPage);
+    this.navCtrl.push(OrderFinishPage, {'key': key});
   }
 
   ionViewDidLoad() {

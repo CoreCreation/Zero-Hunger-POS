@@ -24,24 +24,26 @@ import { FormGroup, FormControl, Validators } from '@angular/forms';
 export class CustomerInformationPage {
   currentOrder: Order;
   formGroup: FormGroup;
+  method: string;
 
   //TODO ADD ADDRESS AND pick up or Delivery or eat in
 
   constructor(public navCtrl: NavController, public navParams: NavParams) {
     this.formGroup = new FormGroup({
       name: new FormControl('', Validators.required),
-      tele: new FormControl('', [ Validators.pattern('[0-9]{10}'), Validators.required ])
+      tele: new FormControl('', [ Validators.pattern('[0-9]{10}'), Validators.required ]),
+      city: new FormControl('', Validators.required),
+      district: new FormControl('', Validators.required),
+      street: new FormControl('', Validators.required),
+      number: new FormControl('', Validators.required),
+      method: new FormControl('', Validators.required)
     });  
     this.currentOrder = navParams.data;
-        //TODO Remove this Log
-        this.currentOrder.logItems();
   }
 
-  nextPageClick(name:string, tele:string){
-    if(this.validateForm(name, tele)){
+  nextPageClick(method:string, name:string, tele: string, city: string, district: string, street: string, number: string){
+    if(this.validateForm(method, name, tele, city, district, street, number)){
       this.pushFinishOrderPage();
-    }else{
-      // TODO ALERT ERROR
     }
   }
 
@@ -49,13 +51,13 @@ export class CustomerInformationPage {
     this.navCtrl.push(FinishOrderPage, this.currentOrder);
   }
 
-  validateForm(name:string, tele: string) : boolean{
+  validateForm(method:string, name:string, tele: string, city: string, district: string, street: string, number: string) : boolean{
     if(this.formGroup.status != "VALID"){
       return false;
     }
     //Fix the OOP design of this so that each object owns its own data and passes it to the right objects for management
-    this.currentOrder.customer.setName(name);
-    this.currentOrder.customer.setTelephone(tele);
+    this.currentOrder.customer.construct(name, tele, city, district, street, number);
+    this.currentOrder.setMethod(method);
     return true;
   }
 

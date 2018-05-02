@@ -21,11 +21,12 @@ import { AngularFireDatabase } from 'angularfire2/database';
 export class CurrentOrderPage {
   afDatabase: AngularFireDatabase
   order: Order;
-  key:string;
+  msgText: string;
   constructor(public navCtrl: NavController, public navParams: NavParams, afDatabase: AngularFireDatabase, public alertCtrl: AlertController) {
     this.afDatabase = afDatabase;
     this.order = this.navParams.data;
     //this.key = this.navParams.get('key');
+    this.msgText = "";
   }
   
   finishOrder(order: Order){
@@ -59,6 +60,10 @@ export class CurrentOrderPage {
     });
     alert.present();
     
+  }
+
+  sendMsg(){
+    this.afDatabase.database.ref("/orders/" + this.order.key + "/message").set(this.msgText);
   }
 
   ionViewDidLoad() {

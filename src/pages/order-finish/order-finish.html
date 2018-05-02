@@ -13,6 +13,12 @@
 </ion-header>
 
 
-<ion-content padding (click)='returnHome()'>
-You've got a pizza coming your way!
+<ion-content padding>
+<ion-list>
+  <ion-item *ngFor="let item of order | async">
+    Order Status: {{ item.status }}
+    <br />
+    Message: {{ item.message }}
+  </ion-item>
+</ion-list>
 </ion-content>

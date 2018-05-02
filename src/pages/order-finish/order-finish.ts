@@ -1,5 +1,8 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, Item } from 'ionic-angular';
+import { AngularFireDatabase, AngularFireList } from 'angularfire2/database';
+import { Observable } from 'rxjs/Observable';
+import { Order } from '../../classes/order';
 
 /**
  * Generated class for the OrderFinishPage page.
@@ -14,8 +17,13 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
   templateUrl: 'order-finish.html',
 })
 export class OrderFinishPage {
-  //This page could have been a generic page to display any text or image like a pop up
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+
+  orderID: string;
+  order : Observable<Order[]>;
+
+  constructor(public navCtrl: NavController, public navParams: NavParams, public afDatabase: AngularFireDatabase) {
+    this.orderID = this.navParams.get('key');
+    this.order = this.afDatabase.list<Order>('/orders', ref => ref.orderByKey().equalTo(this.orderID)).valueChanges();
   }
 
   returnHome()

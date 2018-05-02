@@ -13,17 +13,48 @@
 </ion-header>
 
 <ion-content padding>
-    ID: {{ order.key }}
-    <br>
-    {{ order.date }}
-    <br>
-    {{ order.customer.name }}
-    <br>
-    <div *ngFor="let item of order.orderItems">
-      {{ item.title }}
-      <br>
-      {{ item.cost }}
-    </div>
+  <ion-list>
+    <ion-list-header>
+      ID: {{ order.key }}
+    </ion-list-header>
+    <ion-item>
+      <b>Date:</b> {{ order.date }}
+    </ion-item>
+    <ion-item>
+      <b>Name:</b> {{ order.customer.name }}
+    </ion-item>
+    <ion-item>
+      <b>Telephone Number:</b> {{ order.customer.telephone }}
+    </ion-item>
+    <ion-list-header>Address:</ion-list-header>
+    <ion-item>
+      {{ order.customer.city }}
+    </ion-item>
+    <ion-item>
+      {{ order.customer.district }}
+    </ion-item>
+    <ion-item>
+      {{ order.customer.street }}
+    </ion-item>
+    <ion-item>
+      {{ order.customer.number }}
+    </ion-item>
+    <ion-list-header>
+      Order Items
+    </ion-list-header>
+    <ion-item *ngFor="let item of order.orderItems">
+      {{ item.title }} : ${{ item.cost }}
+    </ion-item>
+    <ion-list-header>
+      Message:
+    </ion-list-header>
+    <ion-item>
+      <ion-textarea [(ngModel)]="msgText">
+
+      </ion-textarea>
+    </ion-item>
+    <button ion-button (click)='sendMsg()'>Send Message</button>
     <button ion-button (click)='finishOrder(order)'>Finish Order</button>
     <button ion-button color="danger" (click)='deleteOrder(order)'>Delete Order</button>
+  </ion-list>
 </ion-content>
