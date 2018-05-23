@@ -52,7 +52,9 @@
       <ion-textarea [(ngModel)]="msgText">
 
       </ion-textarea>
-      <button ion-button (click)='sendMsg()'>Send Message</button>
+    </ion-item>
+    <ion-item>
+        <button ion-button full large (click)='sendMsg()'>Send Message</button>
     </ion-item>
     <ion-list-header>
       Status:
@@ -61,7 +63,7 @@
       <ion-grid>
         <ion-row>
           <ion-col col-6>
-      <button ion-button full large (click)='startOrder(order)'>Start Order</button>
+      <button ion-button full large (click)='startOrder()'>Start Order</button>
       </ion-col>
       <ion-col col-6>
       <button ion-button full large (click)='finishOrder(order)'>Finish Order</button>

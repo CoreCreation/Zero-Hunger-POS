@@ -20,10 +20,16 @@ export class OrderFinishPage {
 
   orderID: string;
   order : Observable<Order[]>;
+  status: string;
+  lastMSG: string;
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public afDatabase: AngularFireDatabase) {
     this.orderID = this.navParams.get('key');
     this.order = this.afDatabase.list<Order>('/orders', ref => ref.orderByKey().equalTo(this.orderID)).valueChanges();
+    this.order.subscribe({next: order => {
+      this.status = order[0].status;
+      this.lastMSG = order[0].message;
+    }});
   }
 
   returnHome()

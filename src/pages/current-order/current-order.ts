@@ -30,7 +30,7 @@ export class CurrentOrderPage {
   }
   
   finishOrder(order: Order){
-    console.log(order);
+    this.afDatabase.database.ref("/orders/" + this.order.key + "/status").set("Finished");
     this.afDatabase.list<Order>('/completedOrders').push(new FinishedOrder(order.date, order.customer, order.orderItems));
     this.afDatabase.list<Order>('/orders').remove(order.key);
     this.navCtrl.popToRoot();
@@ -64,6 +64,11 @@ export class CurrentOrderPage {
 
   sendMsg(){
     this.afDatabase.database.ref("/orders/" + this.order.key + "/message").set(this.msgText);
+  }
+
+  startOrder(){
+    //The string will need to be changed to the translation code
+    this.afDatabase.database.ref("/orders/" + this.order.key + "/status").set("Order Start");
   }
 
   ionViewDidLoad() {
