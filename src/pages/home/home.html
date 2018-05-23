@@ -28,7 +28,9 @@
     <div text-right>${{ menuItem.cost }}</div>
     </ion-card-content>
     </ion-card>
-  <ion-footer [hidden]="currentOrder.empty()"> 
+</ion-content>
+
+<ion-footer [hidden]="currentOrder.empty()"> 
     <ion-toolbar>
       <ion-title>Total: ${{currentOrder.getTotal()}}</ion-title> 
       <ion-buttons end>
@@ -36,4 +38,3 @@
       </ion-buttons>
     </ion-toolbar>
   </ion-footer>
-</ion-content>
