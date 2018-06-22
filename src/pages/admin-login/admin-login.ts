@@ -7,6 +7,7 @@ import { AngularFireAuth } from 'angularfire2/auth';
 import * as firebase from 'firebase/app';
 //Pages
 import { AdminHomePage } from '../admin-home/admin-home';
+import { HomePage } from '../home/home';
 
 /**
  * Generated class for the AdminLoginPage page.
@@ -15,7 +16,6 @@ import { AdminHomePage } from '../admin-home/admin-home';
  * Ionic pages and navigation.
  */
 
-@IonicPage()
 @Component({
   selector: 'page-admin-login',
   templateUrl: 'admin-login.html',
@@ -34,9 +34,11 @@ export class AdminLoginPage {
   }
 
   login(email:string, password: string){
-    this.afAuth.auth.signInWithEmailAndPassword(email, password).catch(function(error) {
-      });
-    this.navCtrl.setRoot(AdminHomePage);
+    this.afAuth.auth.signInWithEmailAndPassword(email, password).then((val)=>{
+      this.navCtrl.setRoot(AdminHomePage);
+    }).catch((error)=>{
+      alert("Try Again");
+    });
   }
 
   logout(){

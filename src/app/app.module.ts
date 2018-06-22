@@ -23,6 +23,7 @@ import { AngularFireDatabaseModule } from 'angularfire2/database';
 import { AngularFireStorageModule } from 'angularfire2/storage';
 import { AdminMenuPage } from '../pages/admin-menu/admin-menu';
 import { AdminMenuAddPage } from '../pages/admin-menu-add/admin-menu-add';
+import { ReviewOrderPage } from '../pages/review-order/review-order';
 
 // AF2 Settings
 export const firebaseConfig = {
@@ -40,7 +41,6 @@ export const firebaseConfig = {
     HomePage,
     ListPage,
     //These have to leave for the build
-    /*
     CustomerInformationPage,
     FinishOrderPage,
     AdminLoginPage,
@@ -49,7 +49,8 @@ export const firebaseConfig = {
     CurrentOrderPage,
     OrderFinishPage,
     AdminMenuPage,
-    AdminMenuAddPage*/
+    AdminMenuAddPage,
+    ReviewOrderPage
   ],
   imports: [
     BrowserModule,
@@ -71,7 +72,8 @@ export const firebaseConfig = {
     CurrentOrderPage,
     OrderFinishPage,
     AdminMenuPage,
-    AdminMenuAddPage
+    AdminMenuAddPage,
+    ReviewOrderPage
   ],
   providers: [
     StatusBar,

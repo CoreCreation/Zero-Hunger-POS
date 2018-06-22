@@ -20,7 +20,6 @@ import { HomePage } from '../home/home';
  * Ionic pages and navigation.
  */
 
-@IonicPage()
 @Component({
   selector: 'page-admin-current-orders',
   templateUrl: 'admin-current-orders.html',

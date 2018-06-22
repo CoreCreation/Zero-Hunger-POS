@@ -15,7 +15,6 @@ import { HomePage } from '../home/home';
  * Ionic pages and navigation.
  */
 
-@IonicPage()
 @Component({
   selector: 'page-admin-menu-add',
   templateUrl: 'admin-menu-add.html',
@@ -39,7 +38,7 @@ export class AdminMenuAddPage {
     public afDatabase: AngularFireDatabase, public alertCtrl: AlertController, 
     public afStor: AngularFireStorage, public afAuth: AngularFireAuth) {
 
-    if(this.afAuth.authState == null)
+    if(!this.afAuth.auth.currentUser)
     {
       this.navCtrl.setRoot(HomePage);
     }

@@ -11,7 +11,6 @@ import { Order } from '../../classes/order';
  * Ionic pages and navigation.
  */
 
-@IonicPage()
 @Component({
   selector: 'page-order-finish',
   templateUrl: 'order-finish.html',

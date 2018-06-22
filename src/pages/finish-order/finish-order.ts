@@ -16,7 +16,6 @@ import { OrderFinishPage } from '../order-finish/order-finish';
  * Ionic pages and navigation.
  */
 
-@IonicPage()
 @Component({
   selector: 'page-finish-order',
   templateUrl: 'finish-order.html',

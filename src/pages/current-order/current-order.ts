@@ -15,18 +15,18 @@ import { HomePage } from '../home/home';
  * Ionic pages and navigation.
  */
 
-@IonicPage()
 @Component({
   selector: 'page-current-order',
   templateUrl: 'current-order.html',
+  providers: [AngularFireAuth]
 })
 export class CurrentOrderPage {
   afDatabase: AngularFireDatabase
   order: Order;
   msgText: string;
-  constructor(public navCtrl: NavController, public navParams: NavParams, afDatabase: AngularFireDatabase, public alertCtrl: AlertController, private afAuth: AngularFireAuth) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, afDatabase: AngularFireDatabase, public alertCtrl: AlertController, public afAuth: AngularFireAuth) {
     
-    if(this.afAuth.authState == null)
+    if(!this.afAuth.auth.currentUser)
     {
       this.navCtrl.setRoot(HomePage);
     }
