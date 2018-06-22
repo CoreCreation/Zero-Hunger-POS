@@ -3,7 +3,7 @@
     <button ion-button menuToggle>
       <ion-icon name="menu"></ion-icon>
     </button>
-    <ion-title>Zero Hunger</ion-title>
+    <ion-title><b>Zero 日落美式披薩</b></ion-title>
   </ion-navbar>
 </ion-header>
 
@@ -32,9 +32,9 @@
 
 <ion-footer [hidden]="currentOrder.empty()"> 
     <ion-toolbar>
-      <ion-title>Total: ${{currentOrder.getTotal()}}</ion-title> 
+      <ion-title>金額: ${{currentOrder.getTotal()}}</ion-title> 
       <ion-buttons end>
-      <button ion-button [hidden]="currentOrder.empty()" (click)='pushCustomerInfoPage()'>Next</button>
+      <button ion-button [hidden]="currentOrder.empty()" (click)='pushCustomerInfoPage()'>下一頁</button>
       </ion-buttons>
     </ion-toolbar>
   </ion-footer>

@@ -5,6 +5,8 @@ import { MenuItem } from '../../classes/menuItem';
 import { Observable } from 'rxjs/Observable';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { AngularFireStorage, AngularFireUploadTask } from 'angularfire2/storage';
+import { AngularFireAuth } from 'angularfire2/auth';
+import { HomePage } from '../home/home';
 
 /**
  * Generated class for the AdminMenuAddPage page.
@@ -17,6 +19,7 @@ import { AngularFireStorage, AngularFireUploadTask } from 'angularfire2/storage'
 @Component({
   selector: 'page-admin-menu-add',
   templateUrl: 'admin-menu-add.html',
+  providers: [AngularFireAuth]
 })
 export class AdminMenuAddPage {
   key: string;
@@ -32,7 +35,15 @@ export class AdminMenuAddPage {
   picture: Observable<string>;
   uploadTask: AngularFireUploadTask;
   //TODO When the image is deleted then readded it does not add an image
-  constructor(public navCtrl: NavController, public navParams: NavParams, public afDatabase: AngularFireDatabase, public alertCtrl: AlertController, public afStor: AngularFireStorage) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, 
+    public afDatabase: AngularFireDatabase, public alertCtrl: AlertController, 
+    public afStor: AngularFireStorage, public afAuth: AngularFireAuth) {
+
+    if(this.afAuth.authState == null)
+    {
+      this.navCtrl.setRoot(HomePage);
+    }
+
     if(this.navParams.get('item') != false){
       let menuItem:MenuItem = this.navParams.data;
       this.key = menuItem.key;
@@ -134,8 +145,10 @@ export class AdminMenuAddPage {
   
   delete(){
     if(this.key != null || this.key != ""){
+    if(this.itemURI != (null || "")){
+      this.deletePic();
+    }
     this.dbConnection.list('/menuItems').remove(this.key);
-    this.deletePic();
     this.navCtrl.popToRoot();
     }
   }

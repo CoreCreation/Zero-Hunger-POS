@@ -5,7 +5,7 @@
 
 <ion-header>
   <ion-navbar>
-    <ion-title>Customer Information</ion-title>
+    <ion-title>客戶資料</ion-title>
   </ion-navbar>
 </ion-header>
 
@@ -16,7 +16,6 @@
     formGroup.get('name').value, 
     formGroup.get('tele').value,
     formGroup.get('city').value,
-    formGroup.get('district').value,
     formGroup.get('street').value,
     formGroup.get('number').value
     )">
@@ -25,48 +24,42 @@
     <ion-list radio-group formControlName='method'>
 
       <ion-item>
-        <ion-label>Pick-Up</ion-label>
-        <ion-radio value="pickUp" checked></ion-radio>
+        <ion-label>外帶</ion-label>
+        <ion-radio value="外帶" checked></ion-radio>
       </ion-item>
       <ion-item>
-          <ion-label>Delivery</ion-label>
-          <ion-radio value="delivery"></ion-radio>
+          <ion-label>外送</ion-label>
+          <ion-radio value="外送"></ion-radio>
       </ion-item>
     </ion-list>
 
 
     <ion-item>
-      <ion-label stacked>Name</ion-label>
+      <ion-label stacked>姓名</ion-label>
 
       <ion-input formControlName="name" required></ion-input>
     </ion-item>
 
     <ion-item>
-      <ion-label stacked>Phone Number</ion-label>
+      <ion-label stacked>電話號碼</ion-label>
 
       <ion-input type="tel" formControlName='tele' required></ion-input>
     </ion-item>
 
     <ion-item>
-        <ion-label stacked>City</ion-label>
+        <ion-label stacked>城市</ion-label>
   
         <ion-input formControlName='city' required></ion-input>
     </ion-item>
-    
-    <ion-item>
-        <ion-label stacked>District</ion-label>
-  
-        <ion-input formControlName='district' required></ion-input>
-    </ion-item>
 
     <ion-item>
-        <ion-label stacked>Street</ion-label>
+        <ion-label stacked>路</ion-label>
   
         <ion-input formControlName='street' required></ion-input>
     </ion-item>
 
     <ion-item>
-        <ion-label stacked>Number</ion-label>
+        <ion-label stacked>號碼</ion-label>
   
         <ion-input formControlName='number' required></ion-input>
     </ion-item>
@@ -74,7 +67,7 @@
     <ion-footer [hidden]="this.formGroup.status != 'VALID'"> 
         <ion-toolbar>
           <ion-buttons end>
-          <button ion-button type="submit">Next</button>
+          <button ion-button type="submit">下一頁</button>
           </ion-buttons>
         </ion-toolbar>
       </ion-footer>

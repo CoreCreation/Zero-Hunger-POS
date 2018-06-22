@@ -7,14 +7,14 @@
 <ion-header>
 
   <ion-navbar>
-    <ion-title>Final Order Review</ion-title>
+    <ion-title>查看訂單</ion-title>
   </ion-navbar>
 
 </ion-header>
 
 
 <ion-content padding>
-  Review Order
+  查看訂單: 
   <b>
     {{ currentOrder.customer.name }}
   </b>
@@ -23,9 +23,9 @@
       {{ item.title }}
     </ion-item> 
     <ion-item>
-      Total Order Cost: {{ currentOrder.getTotal() }}
+      小計: {{ currentOrder.getTotal() }}
     </ion-item>
   </ion-list>
-  <button ion-button full (click)='saveOrder()'>Submit Order</button>
+  <button ion-button full (click)='saveOrder()'>點餐完成</button>
 
 </ion-content>

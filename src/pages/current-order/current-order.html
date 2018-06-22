@@ -7,7 +7,7 @@
 <ion-header>
 
   <ion-navbar>
-    <ion-title>Current Order</ion-title>
+    <ion-title>順序</ion-title>
   </ion-navbar>
 
 </ion-header>
@@ -18,15 +18,15 @@
       ID: {{ order.key }}
     </ion-list-header>
     <ion-item>
-      <b>Date:</b> {{ order.date }}
+      <b>日期:</b> {{ order.date }}
     </ion-item>
     <ion-item>
-      <b>Name:</b> {{ order.customer.name }}
+      <b>姓名:</b> {{ order.customer.name }}
     </ion-item>
     <ion-item>
-      <b>Telephone Number:</b> {{ order.customer.telephone }}
+      <b>電話號碼:</b> {{ order.customer.telephone }}
     </ion-item>
-    <ion-list-header>Address:</ion-list-header>
+    <ion-list-header>地址:</ion-list-header>
     <ion-item>
       {{ order.customer.city }}
     </ion-item>
@@ -40,13 +40,13 @@
       {{ order.customer.number }}
     </ion-item>
     <ion-list-header>
-      Order Items
+      選項清單:
     </ion-list-header>
     <ion-item *ngFor="let item of order.orderItems">
       {{ item.title }} : ${{ item.cost }}
     </ion-item>
     <ion-list-header>
-      Message:
+      訊息:
     </ion-list-header>
     <ion-item>
       <ion-textarea [(ngModel)]="msgText">
@@ -54,25 +54,25 @@
       </ion-textarea>
     </ion-item>
     <ion-item>
-        <button ion-button full large (click)='sendMsg()'>Send Message</button>
+        <button ion-button full large (click)='sendMsg()'>傳送訊息</button>
     </ion-item>
     <ion-list-header>
-      Status:
+      製作情形:
     </ion-list-header>
     <ion-item>
       <ion-grid>
         <ion-row>
           <ion-col col-6>
-      <button ion-button full large (click)='startOrder()'>Start Order</button>
+      <button ion-button full large (click)='startOrder()'>開始製作</button>
       </ion-col>
       <ion-col col-6>
-      <button ion-button full large (click)='finishOrder(order)'>Finish Order</button>
+      <button ion-button full large (click)='finishOrder(order)'>完成餐點</button>
       </ion-col>
       </ion-row>
       </ion-grid>
     </ion-item>
     <ion-item>
-    <button ion-button full large color="danger" (click)='deleteOrder(order)'>Delete Order</button>
+    <button ion-button full large color="danger" (click)='deleteOrder(order)'>刪除訂單</button>
     </ion-item>
   </ion-list>
 </ion-content>

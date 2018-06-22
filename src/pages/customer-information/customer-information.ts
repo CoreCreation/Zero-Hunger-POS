@@ -33,7 +33,6 @@ export class CustomerInformationPage {
       name: new FormControl('', Validators.required),
       tele: new FormControl('', [ Validators.pattern('[0-9]{10}'), Validators.required ]),
       city: new FormControl('', Validators.required),
-      district: new FormControl('', Validators.required),
       street: new FormControl('', Validators.required),
       number: new FormControl('', Validators.required),
       method: new FormControl('', Validators.required)
@@ -41,8 +40,8 @@ export class CustomerInformationPage {
     this.currentOrder = navParams.data;
   }
 
-  nextPageClick(method:string, name:string, tele: string, city: string, district: string, street: string, number: string){
-    if(this.validateForm(method, name, tele, city, district, street, number)){
+  nextPageClick(method:string, name:string, tele: string, city: string, street: string, number: string){
+    if(this.validateForm(method, name, tele, city, street, number)){
       this.pushFinishOrderPage();
     }
   }
@@ -51,12 +50,12 @@ export class CustomerInformationPage {
     this.navCtrl.push(FinishOrderPage, this.currentOrder);
   }
 
-  validateForm(method:string, name:string, tele: string, city: string, district: string, street: string, number: string) : boolean{
+  validateForm(method:string, name:string, tele: string, city: string, street: string, number: string) : boolean{
     if(this.formGroup.status != "VALID"){
       return false;
     }
     //Fix the OOP design of this so that each object owns its own data and passes it to the right objects for management
-    this.currentOrder.customer.construct(name, tele, city, district, street, number);
+    this.currentOrder.customer.construct(name, tele, city, street, number);
     this.currentOrder.setMethod(method);
     return true;
   }

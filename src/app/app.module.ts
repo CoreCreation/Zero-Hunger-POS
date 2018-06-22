@@ -40,6 +40,7 @@ export const firebaseConfig = {
     HomePage,
     ListPage,
     //These have to leave for the build
+    /*
     CustomerInformationPage,
     FinishOrderPage,
     AdminLoginPage,
@@ -48,7 +49,7 @@ export const firebaseConfig = {
     CurrentOrderPage,
     OrderFinishPage,
     AdminMenuPage,
-    AdminMenuAddPage
+    AdminMenuAddPage*/
   ],
   imports: [
     BrowserModule,

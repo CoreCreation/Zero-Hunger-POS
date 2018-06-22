@@ -10,11 +10,10 @@ export class Customer {
         this.name = name;
         this.telephone = telephone;
     }
-    construct(name:string, tele: string, city: string, district: string, street: string, number: string){
+    construct(name:string, tele: string, city: string, street: string, number: string){
         this.name = name;
         this.telephone = tele;
         this.city = city;
-        this.district = district;
         this.street = street;
         this.number = number;
     }

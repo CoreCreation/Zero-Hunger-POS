@@ -7,7 +7,7 @@
 <ion-header>
 
   <ion-navbar>
-    <ion-title>Add Menu Item</ion-title>
+    <ion-title>增加菜單</ion-title>
   </ion-navbar>
 
 </ion-header>
@@ -23,30 +23,30 @@
       menuAdd.get('cookTime').value,
       menuAdd.get('type').value)">
         <ion-item>
-          <ion-label stacked>Title</ion-label>
+          <ion-label stacked>產品名稱</ion-label>
     
           <ion-input formControlName="title" required></ion-input>
         </ion-item>
     
         <ion-item>
-          <ion-label stacked>Description</ion-label>
+          <ion-label stacked>食材種類</ion-label>
     
           <ion-input type="text" formControlName='description' required></ion-input>
         </ion-item>
         <ion-item>
-          <ion-label stacked>Cost</ion-label>
+          <ion-label stacked>價格</ion-label>
           <ion-input type="number" formControlName="cost" required></ion-input>
         </ion-item>
         <ion-item>
-          <ion-label stacked>Cook Time</ion-label>
+          <ion-label stacked>製作時間</ion-label>
           <ion-input type="number" formControlName="cookTime" required></ion-input>  
         </ion-item>
         <ion-item>
-          <ion-label stacked>Food Type</ion-label>
+          <ion-label stacked>產品種類</ion-label>
           <ion-input type="text" formControlName="type" required></ion-input>
         </ion-item>
         <ion-item [hidden]="itemURI">
-          <button ion-button full type="button" (click)="file.click()">Select File</button>
+          <button ion-button full type="button" (click)="file.click()">增加圖片</button>
         </ion-item>
         <ion-card [hidden]="!itemURI">
           <ion-item>
@@ -60,9 +60,9 @@
               <img [src]="picture | async" />
             </ion-item> 
         </ion-card>
-          <button ion-button secondary full type="submit">Save</button>
+          <button ion-button secondary full type="submit">完成</button>
       </form>
       
-      <button [hidden]="key == null || key == ''" ion-button secondary full (click)="delete()">Delete</button>
+      <button [hidden]="key == null || key == ''" ion-button secondary full (click)="delete()">刪除</button>
       <input #file id="filePicker" type="file" hidden accept="image/*" (change)="upload($event)" />
 </ion-content>

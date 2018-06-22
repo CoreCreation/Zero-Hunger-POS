@@ -7,6 +7,8 @@ import { Order } from '../../classes/order';
 import { AngularFireDatabase, AngularFireList } from 'angularfire2/database';
 import { Observable } from 'rxjs/Observable';
 import { AdminMenuAddPage } from '../admin-menu-add/admin-menu-add';
+import { AngularFireAuth } from 'angularfire2/auth';
+import { HomePage } from '../home/home';
 
 
 
@@ -21,13 +23,20 @@ import { AdminMenuAddPage } from '../admin-menu-add/admin-menu-add';
 @Component({
   selector: 'page-admin-menu',
   templateUrl: 'admin-menu.html',
+  providers: [AngularFireAuth]
 })
 export class AdminMenuPage {
 
   dbConnection: AngularFireDatabase;
   menuItems: Observable<MenuItem[]>;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, public afDatabase: AngularFireDatabase) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, public afDatabase: AngularFireDatabase, public afAuth: AngularFireAuth) {
+
+    if(this.afAuth.authState == null)
+    {
+      this.navCtrl.setRoot(HomePage);
+    }
+
     this.dbConnection = afDatabase;
     this.menuItems = this.dbConnection.list<MenuItem>('/menuItems').snapshotChanges().map(actions => {
       return actions.map(action => ({ key: action.key, ...action.payload.val() }));

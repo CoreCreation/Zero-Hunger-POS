@@ -9,6 +9,8 @@ import { MenuItem } from '../../classes/menuItem';
 //Pages
 import { CurrentOrderPage } from '../current-order/current-order';
 import { DataSnapshot } from '@firebase/database-types';
+import { AngularFireAuth } from 'angularfire2/auth';
+import { HomePage } from '../home/home';
 
 
 /**
@@ -22,16 +24,25 @@ import { DataSnapshot } from '@firebase/database-types';
 @Component({
   selector: 'page-admin-current-orders',
   templateUrl: 'admin-current-orders.html',
+  providers: [AngularFireAuth]
 })
 export class AdminCurrentOrdersPage {
   dbConnection: AngularFireDatabase;
   currentOrders: Observable<any[]>;
-  constructor(public navCtrl: NavController, afDatabase: AngularFireDatabase) 
+  constructor(public navCtrl: NavController, afDatabase: AngularFireDatabase, public afAuth: AngularFireAuth) 
   {
+
+    if(this.afAuth.authState == null)
+    {
+      this.navCtrl.setRoot(HomePage);
+    }
+
     //Set up database connection
     this.dbConnection = afDatabase;
     //This binds the keys into the order object
     //order.key
+
+    //This is being denied because the auth is not valid
     this.currentOrders = this.dbConnection.list<Order>('/orders').snapshotChanges().map(actions => {
       return actions.map(action => ({ key: action.key, ...action.payload.val() }));
     });
