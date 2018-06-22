@@ -63,15 +63,8 @@
   
         <ion-input formControlName='number' required></ion-input>
     </ion-item>
+    <button [hidden]="this.formGroup.status != 'VALID'" ion-button full form="contactForm" type="submit">下一頁</button>
   </form> 
 </ion-list>
 
 </ion-content>
-
-<ion-footer [hidden]="this.formGroup.status != 'VALID'"> 
-  <ion-toolbar>
-    <ion-buttons end>
-    <button ion-button form="contactForm" type="submit">下一頁</button>
-    </ion-buttons>
-  </ion-toolbar>
-</ion-footer>
