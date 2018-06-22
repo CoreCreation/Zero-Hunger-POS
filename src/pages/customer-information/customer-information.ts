@@ -25,8 +25,6 @@ export class CustomerInformationPage {
   formGroup: FormGroup;
   method: string;
 
-  //TODO ADD ADDRESS AND pick up or Delivery or eat in
-
   constructor(public navCtrl: NavController, public navParams: NavParams) {
     this.formGroup = new FormGroup({
       name: new FormControl('', Validators.required),

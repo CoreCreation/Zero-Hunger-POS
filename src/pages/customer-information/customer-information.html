@@ -10,8 +10,9 @@
 </ion-header>
 
 <ion-content padding>
-    <ion-list>
-  <form [formGroup]="formGroup"  (ngSubmit)="nextPageClick(
+  <ion-list>
+
+  <form id="contactForm" [formGroup]="formGroup"  (ngSubmit)="nextPageClick(
     formGroup.get('method').value,
     formGroup.get('name').value, 
     formGroup.get('tele').value,
@@ -19,7 +20,6 @@
     formGroup.get('street').value,
     formGroup.get('number').value
     )">
-
 
     <ion-list radio-group formControlName='method'>
 
@@ -63,15 +63,15 @@
   
         <ion-input formControlName='number' required></ion-input>
     </ion-item>
-
-    <ion-footer [hidden]="this.formGroup.status != 'VALID'"> 
-        <ion-toolbar>
-          <ion-buttons end>
-          <button ion-button type="submit">下一頁</button>
-          </ion-buttons>
-        </ion-toolbar>
-      </ion-footer>
   </form> 
 </ion-list>
 
 </ion-content>
+
+<ion-footer [hidden]="this.formGroup.status != 'VALID'"> 
+  <ion-toolbar>
+    <ion-buttons end>
+    <button ion-button form="contactForm" type="submit">下一頁</button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-footer>

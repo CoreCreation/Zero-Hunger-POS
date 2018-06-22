@@ -41,8 +41,8 @@ export class AdminLoginPage {
     });
   }
 
-  logout(){
-    this.afAuth.auth.signOut();
+  returnHome() {
+    this.navCtrl.setRoot(HomePage);
   }
 
   ionViewDidLoad() {

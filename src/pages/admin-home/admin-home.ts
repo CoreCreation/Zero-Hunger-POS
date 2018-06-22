@@ -45,8 +45,7 @@ export class AdminHomePage {
 
   logout()
   {
-    this.afAuth.auth.signOut();
-    this.returnHome();
+    this.afAuth.auth.signOut().then((wow)=>this.returnHome());
   }
 
 }

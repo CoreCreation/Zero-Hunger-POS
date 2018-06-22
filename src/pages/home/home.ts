@@ -32,14 +32,10 @@ export class HomePage {
     //Set up the blank order
     this.currentOrder = new Order();
   }
-  //TODO Divide the Menu with a segment
-  //TODO make Menu Items have a Modal pop up of description
-  //TODO Fix the issue with the floating next button
 
   addToOrder(menuItem: MenuItem)
   {
     this.currentOrder.addItem(menuItem);
-    console.log(menuItem);
   }
 
   removeFromOrder(menuItem: MenuItem)
