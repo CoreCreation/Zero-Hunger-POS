@@ -28,6 +28,7 @@ import { HomePage } from '../home/home';
 export class AdminCurrentOrdersPage {
   dbConnection: AngularFireDatabase;
   currentOrders: Observable<any[]>;
+  date: Date;
   constructor(public navCtrl: NavController, afDatabase: AngularFireDatabase, public afAuth: AngularFireAuth) 
   {
 
@@ -40,6 +41,8 @@ export class AdminCurrentOrdersPage {
     this.dbConnection = afDatabase;
     //This binds the keys into the order object
     //order.key
+
+    this.date = new Date();
 
     //This is being denied because the auth is not valid
     this.currentOrders = this.dbConnection.list<Order>('/orders').snapshotChanges().map(actions => {

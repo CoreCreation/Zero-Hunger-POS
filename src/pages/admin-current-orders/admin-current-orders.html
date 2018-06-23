@@ -16,7 +16,7 @@
 <ion-content padding>
 <ion-list>
   <button ion-item (click)='gotoOrder(order)' *ngFor="let order of currentOrders | async">
-    {{ order.date }} 
+    {{ order.date | date : "short" }} 
     <br>
     {{ order.customer.name}}
     <br>

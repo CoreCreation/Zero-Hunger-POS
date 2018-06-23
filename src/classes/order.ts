@@ -4,7 +4,7 @@ import { forEach } from '@firebase/util/dist/esm/src/obj';
 
 export class Order{
     key: string;
-    date: string;
+    date: number;
     customer: Customer;
     method: string;
     orderItems: Array<MenuItem>;
@@ -17,10 +17,9 @@ export class Order{
         //This should get called when the object is constructed for the first time
         //It should be overwritten everytime after by the construct function
         let date = new Date();
-        this.date = date.toISOString();
-
+        this.date = date.getTime();
     }
-    construct(date:string, customer: Customer, orderItems:Array<MenuItem>)
+    construct(date:number, customer: Customer, orderItems:Array<MenuItem>)
     {
         this.date = date;
         this.customer = customer;
@@ -92,7 +91,7 @@ export class FinishedOrder extends Order{
 
     finishDate:string;
 
-    constructor(date:string, customer: Customer, orderItems:Array<MenuItem>){
+    constructor(date:number, customer: Customer, orderItems:Array<MenuItem>){
         super();
         this.construct(date,customer,orderItems);
         let dateObject = new Date();
