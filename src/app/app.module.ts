@@ -27,12 +27,7 @@ import { ReviewOrderPage } from '../pages/review-order/review-order';
 
 // AF2 Settings
 export const firebaseConfig = {
-    apiKey: "APIKEY",
-    authDomain: "DATA",
-    databaseURL: "https://DATA",
-    projectId: "DATA",
-    storageBucket: "DATA.appspot.com",
-    messagingSenderId: "DATA"
+//Firebase API Keys go here
 };
 
 @NgModule({
